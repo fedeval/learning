@@ -12,3 +12,16 @@ func RandIntSlice(i int) []int {
 	}
 	return nums
 }
+
+func RandIntSliceToN(n int) []int {
+	nums := make([]int, n)
+	for i := 0; i < n; i++ {
+		nums[i] = i + 1
+	}
+
+	rand.Shuffle(len(nums), func(i, j int) {
+		nums[i], nums[j] = nums[j], nums[i]
+	})
+
+	return nums
+}
