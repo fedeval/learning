@@ -12,6 +12,11 @@ func main() {
 	sorted, counted := sortAndCountInversions(a)
 	fmt.Println("Inversions: ", counted)
 	fmt.Println("Sorted: ", sorted)
+
+	// Assignment
+	inputs := dsa.ReadArrayFromTxt("inputs.txt")
+	_, countedA := sortAndCountInversions(inputs)
+	fmt.Println("Counted assignment: ", countedA)
 }
 
 func sortAndCountInversions(a []int) ([]int, int) {
