@@ -1,30 +1,29 @@
 package main
 
 import (
+	"dsa"
 	"fmt"
+	"slices"
 )
 
 func main() {
-	// for i := range 1000 {
-	// 	a := dsa.RandIntSlice(i)
+	for i := range 1000 {
+		a := dsa.RandIntSlice(i)
 
-	// 	naiveSorted := naiveQuickSort(a)
-	// 	b := make([]int, len(a))
-	// 	copy(b, a)
-	// 	inplaceSorted := inPlaceQuickSort(b)
+		naiveSorted := naiveQuickSort(a)
+		b := make([]int, len(a))
+		copy(b, a)
+		inplaceSorted := inPlaceQuickSort(b)
 
-	// 	fmt.Println("Initial: ", a)
-	// 	fmt.Println("Naive Sorted: ", naiveSorted)
-	// 	fmt.Println("Naive Correct: ", slices.IsSorted(naiveSorted))
-	// 	fmt.Println("InPlace Sorted: ", inplaceSorted)
-	// 	fmt.Println("InPlace Correct: ", slices.IsSorted(inplaceSorted))
-	// 	if !slices.IsSorted(inplaceSorted) {
-	// 		panic("not sorted")
-	// 	}
-	// }
-	a := []int{412, 652, 327, 95, 470, 205}
-	b := inPlaceQuickSort(a)
-	fmt.Println("Result: ", b)
+		fmt.Println("Initial: ", a)
+		fmt.Println("Naive Sorted: ", naiveSorted)
+		fmt.Println("Naive Correct: ", slices.IsSorted(naiveSorted))
+		fmt.Println("InPlace Sorted: ", inplaceSorted)
+		fmt.Println("InPlace Correct: ", slices.IsSorted(inplaceSorted))
+		if !slices.IsSorted(inplaceSorted) {
+			panic("not sorted")
+		}
+	}
 }
 
 func naiveQuickSort(a []int) []int {
@@ -49,15 +48,8 @@ func naiveQuickSort(a []int) []int {
 }
 
 func inPlaceQuickSort(a []int) []int {
-	fmt.Println("initial", a)
 	if len(a) <= 1 {
 		return a
-	}
-	if len(a) == 2 {
-		if a[0] < a[1] {
-			return a
-		}
-		return []int{a[1], a[0]}
 	}
 
 	p := a[0]
@@ -71,12 +63,11 @@ func inPlaceQuickSort(a []int) []int {
 			j++
 		}
 	}
-	boundaryElem := a[j]
-	a[j] = p
+	boundaryElem := a[j-1]
+	a[j-1] = p
 	a[0] = boundaryElem
 
-	leftSorted := inPlaceQuickSort(a[:j])
-	righSorted := inPlaceQuickSort(a[j+1:])
-	fmt.Println(leftSorted, righSorted)
+	leftSorted := inPlaceQuickSort(a[:j-1])
+	righSorted := inPlaceQuickSort(a[j:])
 	return append(append(leftSorted, p), righSorted...)
 }
